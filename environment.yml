@@ -163,7 +163,7 @@ dependencies:
     - prometheus-client==0.16.0
     - promise==2.3
     - prompt-toolkit==3.0.36
-    - protobuf==3.19.6
+    - protobuf
     - psutil==5.9.4
     - ptyprocess==0.7.0
     - pure-eval==0.2.2
