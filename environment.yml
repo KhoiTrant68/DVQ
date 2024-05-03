@@ -206,7 +206,7 @@ dependencies:
     - setproctitle==1.3.2
     - shortuuid==1.0.11
     - six==1.16.0
-    - sklearn==0.0.post1
+    - sklearn
     - smmap==5.0.0
     - sniffio==1.3.0
     - soupsieve==2.4
