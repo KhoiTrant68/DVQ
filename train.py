@@ -16,7 +16,7 @@ import pytorch_lightning as pl
 import torch
 from omegaconf import OmegaConf
 from pytorch_lightning import seed_everything
-from pytorch_lightning.plugins import DDPPlugin
+from pytorch_lightning.strategies import DDPStrategy
 from pytorch_lightning.trainer import Trainer
 from utils.utils import instantiate_from_config
 
@@ -227,7 +227,7 @@ if __name__ == "__main__":
     if opt.activate_ddp_share:
         trainer_kwargs["strategy"] = "ddp_sharded"
     else:
-        trainer_kwargs["strategy"] = DDPPlugin(find_unused_parameters=True)
+        trainer_kwargs["strategy"] = DDPStrategy(find_unused_parameters=True)
     # trainer_kwargs["deterministic"] = True  # for reproducible
 
     trainer = Trainer.from_argparse_args(trainer_opt, **trainer_kwargs)

@@ -10,6 +10,7 @@ import data.data_utils as bdu
 from data.imagenet_base import ImagePaths
 from data.default import DefaultDataPath
 import tqdm 
+from utils.utils import download
 
 
 class ImageNetBase(Dataset):
@@ -50,20 +51,20 @@ class ImageNetBase(Dataset):
     
     def _prepare_synset_to_human(self):
         SIZE = 2655750
-        # URL = "https://heibox.uni-heidelberg.de/f/9f28e956cd304264bb82/?dl=1"
+        URL = "https://heibox.uni-heidelberg.de/f/9f28e956cd304264bb82/?dl=1"
         self.human_dict = os.path.join(self.write_root, "synset_human.txt")
-        assert os.path.exists(self.human_dict)
-        assert os.path.getsize(self.human_dict)==SIZE
-        # if (not os.path.exists(self.human_dict) or not os.path.getsize(self.human_dict)==SIZE):
-        #    download(URL, self.human_dict)
+        # assert os.path.exists(self.human_dict)
+        # assert os.path.getsize(self.human_dict)==SIZE
+        if (not os.path.exists(self.human_dict) or not os.path.getsize(self.human_dict)==SIZE):
+           download(URL, self.human_dict)
     
     def _prepare_idx_to_synset(self):
-        # URL = "https://heibox.uni-heidelberg.de/f/d835d5b6ceda4d3aa910/?dl=1"
-        # self.idx2syn = os.path.join(self.write_root, "index_synset.yaml")
+        URL = "https://heibox.uni-heidelberg.de/f/d835d5b6ceda4d3aa910/?dl=1"
+        self.idx2syn = os.path.join(self.write_root, "index_synset.yaml")
         self.idx2syn = os.path.join(self.write_root, "imagenet_idx_to_synset.yml")
         assert os.path.exists(self.idx2syn)
-        # if (not os.path.exists(self.idx2syn)):
-        #     download(URL, self.idx2syn)
+        if (not os.path.exists(self.idx2syn)):
+            download(URL, self.idx2syn)
 
     def _load(self):
         with open(self.txt_filelist, "r") as f:
@@ -130,12 +131,12 @@ class ImageNetTrain(ImageNetBase):
 
             if not os.path.exists(datadir):
                 path = os.path.join(self.root, self.FILES[0])
-                assert os.path.exists(path)
-                assert os.path.getsize(path)==self.SIZES[0]
-                # if not os.path.exists(path) or not os.path.getsize(path)==self.SIZES[0]:
-                    # import academictorrents as at
-                    # atpath = at.get(self.AT_HASH, datastore=self.root)
-                    # assert atpath == path
+                # assert os.path.exists(path)
+                # assert os.path.getsize(path)==self.SIZES[0]
+                if not os.path.exists(path) or not os.path.getsize(path)==self.SIZES[0]:
+                    import academictorrents as at
+                    atpath = at.get(self.AT_HASH, datastore=self.root)
+                    assert atpath == path
 
                 print("Extracting {} to {}".format(path, datadir))
                 os.makedirs(datadir, exist_ok=True)
