@@ -62,7 +62,7 @@ class ImageNetBase(Dataset):
         URL = "https://heibox.uni-heidelberg.de/f/d835d5b6ceda4d3aa910/?dl=1"
         self.idx2syn = os.path.join(self.write_root, "index_synset.yaml")
         self.idx2syn = os.path.join(self.write_root, "imagenet_idx_to_synset.yml")
-        assert os.path.exists(self.idx2syn)
+        # assert os.path.exists(self.idx2syn)
         if (not os.path.exists(self.idx2syn)):
             download(URL, self.idx2syn)
 
