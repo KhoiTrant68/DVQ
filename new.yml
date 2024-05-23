@@ -112,4 +112,4 @@ dependencies:
     - wandb==0.12.21
     - werkzeug==3.0.3
     - yarl==1.9.4
-prefix: /home/infordio-ai/anaconda3/envs/vq
+
